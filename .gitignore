@@ -47,3 +47,9 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# renv for version control
+/renv/
+
+# profile
+.Rprofile
