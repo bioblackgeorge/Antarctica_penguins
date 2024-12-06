@@ -18,10 +18,17 @@ library(tidymodels)
 #' library(palmerpenguins)
 #' knn_impute_data(palmerpenguins::penguins)
 #'
-knn_impute_data <- function(dataset){
+knn_impute_data <- function(dataset, target_col){
+  
+  # allow the user to specify the target column
+  if (!target_col %in% names(dataset)) {
+    stop("The specified target column does not exist.")
+  }
+  
+  formula <- as.formula(paste(target_col, "~ ."))
   
   # create recipe
-  impute_rec <- recipe(species~ ., data = dataset) %>%
+  impute_rec <- recipe(formula, data = dataset) %>%
     step_impute_knn(all_predictors(), neighbors = 5)
   
   # train the recipe 
