@@ -1,7 +1,15 @@
+#' Explore and Summarize Dataset
+#'
+#' This function provides a descriptive overview of a dataset, including structure, 
+#' summary statistics, and missing or duplicate values checks.
+#'
+#' @param dataset A data.frame. The dataset to explore.
+#' @return None. Prints the first few rows, structure, summary statistics, 
+#'         and details about missing and duplicate values in the console.
+#' @examples
+#' explore_data(iris)
+#' 
 explore_data <- function(dataset){
-  # dataset is of class data.frame
-  # provides description of the dataset
-  # checks for duplicate rows and missing values
   
   # prints the first rows, structure and summary statistics of the specified dataset.
     print("Displaying the first rows:")

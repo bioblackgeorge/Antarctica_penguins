@@ -11,12 +11,15 @@ source("src/data_exploration.R")
 source("src/data_corr.R")
 
 # load the data ----
-data("penguins")
+df <- palmerpenguins::penguins %>% 
+  clean_names() 
 
 # data exploration
-explore_data(penguins)
+explore_data(df)
 
 # correlation plot
-corr_data(penguins)
+corr_data(df)
 
+# impute missing values via knn method
+knn_impute_data(df)
 
