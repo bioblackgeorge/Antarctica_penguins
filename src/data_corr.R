@@ -16,7 +16,7 @@ library(corrr)
 #' library(corrr)
 #' corr_data(iris)
 #' 
-corr_data <- function(dataset){
+corr_plot <- function(dataset, title, output_path){
   
   # numeric cols without missing values
   dataset_numeric <- dataset %>%
@@ -24,16 +24,17 @@ corr_data <- function(dataset){
     na.omit()  
   
   # cor matrix
-  cor_matrix <- dataset_numeric %>%
-    correlate()
+  correlation_matrix <- dataset_numeric %>%
+    correlate() %>% 
+    rearrange() %>%  # group highly correlated together
+    rplot()
   
   # cor plot
-  cor_plot <- cor_matrix %>%
-    rearrange() %>%  # group highly correlated together
-    rplot()          
+  correlation_plot <- correlation_matrix +
+    ggtitle(title)
   
-  return(cor_plot)
+  # save the correlation plot
+  ggsave(output_path, plot = correlation_plot, width = 10, height = 8) 
   
+  return(correlation_plot)
 }
-
-

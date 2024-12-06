@@ -9,10 +9,12 @@
 #' @examples
 #' explore_data(iris)
 #' 
-explore_data <- function(dataset){
+explore_data <- function(dataset, output_file){
   
-  # prints the first rows, structure and summary statistics of the specified dataset.
-    print("Displaying the first rows:")
+  sink(output_file)  # redirect output to a file
+  
+  # print the first rows, structure and summary statistics of the specified dataset.
+  print("Displaying the first rows:")
   print(head(dataset)) 
   cat("\n")  
   
@@ -24,7 +26,7 @@ explore_data <- function(dataset){
   print(summary(dataset)) 
   cat("\n")
   
-  # Check for missing values
+  # check for missing values
   missing_values <- sum(is.na(dataset))
   if (missing_values > 0) {
     print(paste("The dataset contains", missing_values, "missing values"))
@@ -32,12 +34,13 @@ explore_data <- function(dataset){
     print("No missing values were found")
   }
 
-  # Check for duplicate rows
+  # check for duplicate rows
   duplicate_rows <- nrow(dataset) - nrow(unique(dataset))
   if (duplicate_rows > 0) {
     print(paste("The dataset contains", duplicate_rows, "duplicate rows"))
   } else {
     print("No duplicate rows were found")
   }
-
+  
+  sink() # end redirecting
 }
