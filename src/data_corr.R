@@ -28,9 +28,11 @@ corr_data <- function(dataset){
     correlate()
   
   # cor plot
-  cor_matrix %>%
+  cor_plot <- cor_matrix %>%
     rearrange() %>%  # group highly correlated together
     rplot()          
+  
+  return(cor_plot)
   
 }
 

@@ -2,11 +2,11 @@ library(tidymodels)
 
 #' Impute Missing Data Using k-Nearest Neighbors
 #'
-#' This function imputes missing values in a dataset using the k-nearest neighbors (k-NN) method 
+#' This function imputes missing values in a dataset (excluding the target variable) using the k-nearest neighbors (k-NN) method 
 #' from the `tidymodels` framework.
 #'
-#' @param dataset A data.frame. The dataset to impute, with a target column named `species` 
-#'                and other predictor variables.
+#' @param dataset A data.frame. The dataset to impute.
+#' @param target_col A character string. The name of the target column (outcome variable) that will not be imputed.
 #' @return A data.frame with missing values imputed for the predictor columns.
 #' @details
 #' This function uses a `recipe` from the `tidymodels` package to impute missing values in all 
@@ -16,7 +16,7 @@ library(tidymodels)
 #' @examples
 #' library(tidymodels)
 #' library(palmerpenguins)
-#' knn_impute_data(palmerpenguins::penguins)
+#' knn_impute_data(palmerpenguins::penguins, target_col = "species")
 #'
 knn_impute_data <- function(dataset, target_col){
   
@@ -35,10 +35,8 @@ knn_impute_data <- function(dataset, target_col){
   impute_prep <- prep(impute_rec, training = dataset)
   
   # apply the trained recipe
-  penguins_imputed <- bake(impute_prep, new_data = NULL)
+  imputed_results <- bake(impute_prep, new_data = NULL)
   
-  # validate by checking the first rows
-  head(penguins_imputed)
+  return(imputed_results)
   
 }
-  
