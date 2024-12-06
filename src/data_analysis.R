@@ -13,7 +13,7 @@ library(tidymodels)
 #' library(tidymodels)
 #' 
 #' # Perform PCA on the iris dataset
-#' pca_data(iris, target_col = "Species", num_comp = 2)
+#' perform_pca(iris, target_col = "Species", num_comp = 2)
 #'
 #' @export
 perform_pca <- function(dataset, num_comp = 2) {
