@@ -55,4 +55,4 @@ rsconnect/
 .Rprofile
 
 # irrelevant files from pca html plot
-results/pca_plot_files/
+results/pls_plot_files/

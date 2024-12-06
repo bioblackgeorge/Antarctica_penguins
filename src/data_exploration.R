@@ -4,14 +4,15 @@
 #' summary statistics, and missing or duplicate values checks.
 #'
 #' @param dataset A data.frame. The dataset to explore.
+#' @param output_path A character string specifying the full path (including the file name) where the output file will be saved.
 #' @return None. Prints the first few rows, structure, summary statistics, 
 #'         and details about missing and duplicate values in the console.
 #' @examples
 #' explore_data(iris)
 #' 
-explore_data <- function(dataset, output_file){
+explore_data <- function(dataset, output_path){
   
-  sink(output_file)  # redirect output to a file
+  sink(output_path)  # redirect output to a file
   
   # print the first rows, structure and summary statistics of the specified dataset.
   print("Displaying the first rows:")
