@@ -1,4 +1,8 @@
-# Antarctica_penguins
+# Penguin Data Analysis with PLS
+
+This repository contains an R-based workflow for analyzing penguin data using Partial Least Squares (PLS) analysis. The project includes data exploration, visualization, cleaning, and statistical analysis. 
+
+Below is a detailed description of the key scripts and their functionality.
 
 ## Dataset description
 Focuses on three species of penguins (Adelie, Chinstrap, and Gentoo) found in the Palmer Archipelago, Antarctica. 
@@ -14,6 +18,117 @@ Flipper Length (mm): Length of the penguin's flipper. <br>
 Body Mass (g): Body mass of the penguin. <br>
 Sex: The sex of the penguin (male or female). <br>
 Year: The year when the data was collected.
+
+---
+
+## **Main Script: `main.R`**
+
+This script orchestrates the data processing pipeline, combining various modular functions and classes to execute the complete analysis.
+
+### **Key Steps:**
+1. **Load Required Libraries**:
+   Utilizes libraries like `tidyverse`, `janitor`, and `palmerpenguins` for data manipulation and visualization.
+   
+2. **Load Custom Modules**: Sources the project-specific functions and classes from:
+   - `data_exploration.R`
+   - `data_visualization.R`
+   - `data_cleaning.R`
+   - `data_analysis.R`
+
+3. **Data Loading and Cleaning**:
+   Loads the penguin dataset, cleans column names, and removes irrelevant columns.
+
+4. **Data Exploration**:
+   Generates a dataset summary and saves it to `results/dataset_summary.txt`.
+
+5. **Data Visualization**:
+   Creates and saves a correlation plot of numerical variables as `results/correlation_plot.jpg`.
+
+6. **Data Imputation**:
+   Handles missing values using k-Nearest Neighbors (k-NN) imputation.
+
+7. **Partial Least Squares (PLS) Analysis**:
+   - Prepares PLS data using the `PLSanalysis` R6 class.
+   - Generates a 3D scatterplot of PLS components and a loadings plot for top variables.
+
+---
+
+## **Modular Scripts**
+
+### **1. Data Exploration: `src/data_exploration.R`**
+Provides a descriptive summary of the dataset:
+- Displays the first few rows, structure, and summary statistics.
+- Identifies missing and duplicate values.
+- Saves the output to a specified file.
+
+### **2. Data Visualization: `src/data_visualization.R`**
+Creates a correlation plot of numeric variables:
+- Uses the `corrr` package to compute and visualize correlations.
+- Groups highly correlated variables for clarity.
+- Saves the plot as an image.
+
+### **3. Data Cleaning: `src/data_cleaning.R`**
+Imputes missing data with k-NN:
+- Excludes the target variable from imputation.
+- Uses the `tidymodels` package to apply a k-NN-based recipe.
+- Returns the cleaned dataset.
+
+### **4. Data Analysis with PLS: `src/data_analysis.R`**
+Defines an R6 class `PLSanalysis` for performing PLS analysis:
+- **Key Methods**:
+  - `prepare_pls()`: Prepares data with Z-Score normalization and PLS transformation.
+  - `get_pls_data()`: Retrieves PLS-transformed data.
+  - `pls_plot()`: Generates a 3D scatterplot of PLS components.
+  - `pls_loadings_plot()`: Visualizes PLS loadings for top variables.
+
+---
+
+
+## **Results**
+
+The analysis pipeline generates the following results:
+1. **Dataset Summary**: `results/dataset_summary.txt`
+2. **Correlation Plot**: `results/correlation_plot.jpg`
+3. **PLS 3D Scatterplot**: `results/pls_plot.html`
+4. **PLS Loadings Plot**: `results/pls_loadings.jpg`
+
+---
+
+project_structure:
+  - main.R: "Main analysis script"
+  - src:
+      - data_exploration.R: "Data exploration functions"
+      - data_visualization.R: "Data Visualization functions"
+      - data_cleaning.R: "Data cleaning functions"
+      - data_analysis.R: "Data Analysis with PLS class"
+  - results:
+      - dataset_summary.txt: "Output summary of the dataset"
+      - correlation_plot.jpg: "Correlation plot image"
+      - pls_plot.html: "PLS plot in HTML format"
+      - pls_loadings.jpg: "PLS loadings plot image"
+  - README.md: "Project description"
+
+---
+
+## **Install Required Packages**
+   Run the following to install and restore required dependencies:
+   ```
+   renv::restore()
+  ```
+
+## **Dependencies**
+- R (≥ 4.0.0)
+- Packages: 
+  - `renv`
+  - `tidyverse`
+  - `janitor`
+  - `palmerpenguins`
+  - `corrr`
+  - `tidymodels`
+  - `plotly`
+  - `mixOmics`
+  - `ggplot2`
+
 
 # Dataset references
 
